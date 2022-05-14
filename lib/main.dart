@@ -4,8 +4,8 @@ import 'package:zoom_clone/controllers/auth_controller.dart';
 
 import 'package:zoom_clone/utils/colors.dart';
 import 'package:zoom_clone/firebase_options.dart';
-import 'package:zoom_clone/views/screens/auth/login_screen.dart';
 import 'package:zoom_clone/views/screens/home_screen.dart';
+import 'package:zoom_clone/views/screens/auth/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
