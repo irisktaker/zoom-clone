@@ -8,7 +8,7 @@ class AuthController {
   final _firebaseStore = FirebaseFirestore.instance;
   //. we need this to keep the user sign_in if user is signed in after checking the the user state
   //. to look for if the user authenticated or not
-  Stream<User?> get authChanges => _auth.authStateChanges(); 
+  Stream<User?> get authChanges => _auth.authStateChanges();
   User get user => _auth.currentUser!; // this user have all values of our users
 
   //.

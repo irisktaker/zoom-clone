@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zoom_clone/controllers/auth_controller.dart';
 import 'package:zoom_clone/controllers/jitsi_controller.dart';
 import 'package:zoom_clone/utils/colors.dart';
+import 'package:zoom_clone/views/widgets/meeting_options.dart';
 
 class VideoCallScreen extends StatefulWidget {
   const VideoCallScreen({Key? key}) : super(key: key);
@@ -17,6 +18,9 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   late TextEditingController meetingIDController;
   late TextEditingController usernameController;
 
+  bool isAudioMuted = true;
+  bool isVideoMuted = true;
+
   @override
   void initState() {
     meetingIDController = TextEditingController();
@@ -28,10 +32,22 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   _joinMeeting() {
     _jitsiController.createMeeting(
       roomName: meetingIDController.text,
-      isAudioMuted: true,
-      isVideoMuted: true,
+      isAudioMuted: isAudioMuted,
+      isVideoMuted: isVideoMuted,
       username: usernameController.text,
     );
+  }
+
+  _onAudioMuted(bool audioValue) {
+    setState(() {
+      isAudioMuted = audioValue;
+    });
+  }
+
+  _onVideoMuted(bool videoValue) {
+    setState(() {
+      isVideoMuted = videoValue;
+    });
   }
 
   @override
@@ -78,7 +94,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           InkWell(
             onTap: _joinMeeting,
             child: Container(
@@ -93,6 +109,18 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                 ),
               ),
             ),
+          ),
+          const SizedBox(height: 10),
+          MeetingOptions(
+            text: "Mute Audio",
+            isMute: isAudioMuted,
+            onChanged: _onAudioMuted,
+          ),
+          const SizedBox(height: 10),
+          MeetingOptions(
+            text: "Turn off Video",
+            isMute: isVideoMuted,
+            onChanged: _onVideoMuted,
           ),
         ],
       ),
